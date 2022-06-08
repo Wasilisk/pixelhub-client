@@ -8,6 +8,6 @@ export const ResetPasswordSchema: SchemaOf<ResetPasswordRequest> = Yup.object().
     .max(20, 'Maximum length - 20 characters')
     .required('New password is required'),
   confirmNewPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
     .required('New password confirm field is required'),
 });

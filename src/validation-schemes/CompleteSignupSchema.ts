@@ -13,6 +13,6 @@ export const CompleteSignupSchema: SchemaOf<CompleteSignupRequest> = Yup.object(
   profile: Yup.object().shape({
     username: Yup.string().required('Username is required'),
     bio: Yup.string().notRequired(),
-    birthday: Yup.string().required()
+    birthday: Yup.string().notRequired()
   }).required()
 });

@@ -1,6 +1,6 @@
 import {AxiosResponse} from "axios";
 import $api from "../http";
-import {Tokens} from "../models/response/Tokens";
+import {AuthResponse} from "../models/response/AuthResponse";
 import {
   CompleteSignupRequest,
   EmailRequest,
@@ -14,11 +14,11 @@ export class AuthService {
     return $api.post('auth/local/signup', data);
   }
 
-  static async login(data: LoginRequest): Promise<AxiosResponse<Tokens>> {
+  static async login(data: LoginRequest): Promise<AxiosResponse<AuthResponse>> {
     return $api.post('auth/local/signin', {...data});
   }
 
-  static async completeSignup(token: string, data: CompleteSignupRequest): Promise<AxiosResponse<Tokens>> {
+  static async completeSignup(token: string, data: CompleteSignupRequest): Promise<AxiosResponse<AuthResponse>> {
     return $api.post(`auth/signup/complete/${token}`, {...data});
   }
 
@@ -26,10 +26,10 @@ export class AuthService {
     return $api.get(`auth/signup/complete/${token}`);
   }
 
-  static async successSocialMediaAuth(token: string): Promise<AxiosResponse<Tokens>> {
+  static async successSocialMediaAuth(token: string): Promise<AxiosResponse<AuthResponse>> {
     return $api.get('auth/success', {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
       }
     });
   }

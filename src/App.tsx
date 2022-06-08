@@ -10,11 +10,14 @@ import Login from "./pages/Login";
 import SuccessAuth from "./pages/SuccessAuth";
 import CompleteSignup from "./pages/CompleteSignup";
 import {ToastContainer} from "react-toastify";
+import {store} from "./store";
+import {Provider} from "react-redux";
 
 
 function App() {
   return (
     <React.StrictMode>
+      <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +30,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored"/>
+      </Provider>
     </React.StrictMode>
   );
 }

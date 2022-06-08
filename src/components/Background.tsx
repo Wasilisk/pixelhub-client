@@ -26,7 +26,6 @@ const Background = styled.div`
   @media (max-width: 768px) {
     min-height: 100%;
     height: auto;
-    align-items: start;
   }
 `;
 

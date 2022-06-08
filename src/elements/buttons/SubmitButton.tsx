@@ -12,4 +12,9 @@ export const SubmitButton = styled(Button)`
     background-color: #0361ff;
     border-color: #005cf5;
   }
+  
+  &:disabled {
+    background-color: #66a9ff;
+    padding: 0;
+  }
 `

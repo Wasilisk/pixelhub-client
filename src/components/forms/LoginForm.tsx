@@ -1,13 +1,14 @@
 import {SubmitButton} from "../../elements/buttons";
-import React from "react";
+import React, {useState} from "react";
 import {useFormik} from "formik";
 import {LoginRequest} from "../../models/request";
 import {LoginSchema} from "../../validation-schemes";
-import {CustomLink, Form, SmallText, TextField} from "../../elements/common";
+import {CustomLink, Form, Loader, SmallText, TextField} from "../../elements/common";
 import {AuthService} from "../../services";
 import {useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {values, errors, touched, handleSubmit, handleChange} = useFormik<LoginRequest>({
     initialValues: {
@@ -16,8 +17,10 @@ const LoginForm = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: values => {
+      setIsLoading(true);
       AuthService.login(values)
         .then(()=> navigate('/'))
+        .finally(() => setIsLoading(false));
     },
   });
   return (
@@ -44,7 +47,11 @@ const LoginForm = () => {
       <SmallText>Forgot your password?
         <CustomLink to="reset-password">Reset your password.</CustomLink>
       </SmallText>
-      <SubmitButton type="submit">Create account</SubmitButton>
+      <SubmitButton type="submit" disabled={isLoading}>
+        {
+          isLoading ? <Loader size="30px"/>: "Sign in"
+        }
+      </SubmitButton>
     </Form>
   );
 };

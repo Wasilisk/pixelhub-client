@@ -1,2 +1,2 @@
-export * from './SelectRange';
+export * from './selectRange';
 export * from './notifications'

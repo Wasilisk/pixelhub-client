@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {FiLock} from "react-icons/fi";
 import {CompleteSignupRequest} from "../../models/request";
@@ -9,8 +9,8 @@ import {CompleteSignupSchema} from "../../validation-schemes";
 import {AuthService} from "../../services";
 import {DaySelect, MonthSelect, YearSelect} from "../../elements/selects";
 import {SubmitButton} from "../../elements/buttons";
-import {CreateDate} from "../../models/common";
-import {Form, Label, LabelWithIcon, SmallText, Textarea, TextField} from "../../elements/common";
+import {ConfirmToken, CreateDate} from "../../models/common";
+import {Form, Label, LabelWithIcon, SmallText, Textarea, TextField, Loader} from "../../elements/common";
 
 const FlexInputGroup = styled.div`
   display: flex;
@@ -41,8 +41,9 @@ const FlexInputGroup = styled.div`
   }
 `
 
-const CompleteSignupForm = ({token}: any) => {
+const CompleteSignupForm = ({token}: ConfirmToken) => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const {values, errors, touched, handleSubmit, handleChange} = useFormik<CompleteSignupRequest & CreateDate>({
       initialValues: {
@@ -61,9 +62,13 @@ const CompleteSignupForm = ({token}: any) => {
       onSubmit: values => {
         const {years, months, days, ...requestValues} = values
         requestValues.profile.birthday = moment({years, months, days}).format('LL');
-        AuthService.completeSignup(token, {...requestValues})
+        setIsLoading(true);
+        AuthService.completeSignup(token!, {...requestValues})
           .then(() => {
             navigate('/')
+          })
+          .finally(() => {
+            setIsLoading(false)
           })
       },
     });
@@ -137,7 +142,11 @@ const CompleteSignupForm = ({token}: any) => {
             />
           </div>
         </FlexInputGroup>
-        <SubmitButton type="submit">Complete Sign Up</SubmitButton>
+        <SubmitButton type="submit" disabled={isLoading}>
+          {
+            isLoading ? <Loader size="30px"/>: "Complete Sign Up"
+          }
+        </SubmitButton>
       </Form>
     )
   }

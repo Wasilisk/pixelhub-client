@@ -8,3 +8,4 @@ export * from './FieldError';
 export * from './TextField';
 export * from './Textarea';
 export * from './LabelWithIcon';
+export * from './Loader';
