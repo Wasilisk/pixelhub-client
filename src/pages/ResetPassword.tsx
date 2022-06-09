@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Background from "../components/Background";
-import PixelHubLogo from "../assets/logo/pixelhub_logo.png"
+import PixelHubLogo from "../assets/logo/pixelhub_icon.png"
 import AuthContainer from "../components/AuthContainer";
 import ResetPasswordForm from "../components/forms/ResetPasswordForm";
 import {useNavigate, useParams} from "react-router-dom";

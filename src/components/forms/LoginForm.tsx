@@ -6,9 +6,13 @@ import {LoginSchema} from "../../validation-schemes";
 import {CustomLink, Form, Loader, SmallText, TextField} from "../../elements/common";
 import {AuthService} from "../../services";
 import {useNavigate} from "react-router-dom";
+import {login} from "../../store/auth/authSlice";
+import {setTokens} from "../../utils";
+import {useAppDispatch} from "../../store";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {values, errors, touched, handleSubmit, handleChange} = useFormik<LoginRequest>({
     initialValues: {
@@ -19,7 +23,11 @@ const LoginForm = () => {
     onSubmit: values => {
       setIsLoading(true);
       AuthService.login(values)
-        .then(()=> navigate('/'))
+        .then(({data})=> {
+          dispatch(login(data));
+          setTokens(data);
+          navigate('/')
+        })
         .finally(() => setIsLoading(false));
     },
   });

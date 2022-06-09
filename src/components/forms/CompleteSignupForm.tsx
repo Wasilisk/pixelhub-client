@@ -11,6 +11,9 @@ import {DaySelect, MonthSelect, YearSelect} from "../../elements/selects";
 import {SubmitButton} from "../../elements/buttons";
 import {ConfirmToken, CreateDate} from "../../models/common";
 import {Form, Label, LabelWithIcon, SmallText, Textarea, TextField, Loader} from "../../elements/common";
+import {login} from "../../store/auth/authSlice";
+import {setTokens} from "../../utils";
+import {useAppDispatch} from "../../store";
 
 const FlexInputGroup = styled.div`
   display: flex;
@@ -43,6 +46,7 @@ const FlexInputGroup = styled.div`
 
 const CompleteSignupForm = ({token}: ConfirmToken) => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
 
     const {values, errors, touched, handleSubmit, handleChange} = useFormik<CompleteSignupRequest & CreateDate>({
@@ -64,7 +68,9 @@ const CompleteSignupForm = ({token}: ConfirmToken) => {
         requestValues.profile.birthday = moment({years, months, days}).format('LL');
         setIsLoading(true);
         AuthService.completeSignup(token!, {...requestValues})
-          .then(() => {
+          .then(({data}) => {
+            dispatch(login(data));
+            setTokens(data);
             navigate('/')
           })
           .finally(() => {

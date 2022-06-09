@@ -13,6 +13,10 @@ export const SubmitButton = styled(Button)`
     border-color: #005cf5;
   }
   
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgb(73 141 255 / 50%);
+  }
+  
   &:disabled {
     background-color: #66a9ff;
     padding: 0;

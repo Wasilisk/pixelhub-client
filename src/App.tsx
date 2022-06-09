@@ -20,7 +20,10 @@ function App() {
       <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
+          <Route path="/gallery" element={<Home />} />
+          <Route path="/groups" element={<Home />} />
+          <Route path="/users" element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="signup/complete/:token" element={<CompleteSignup />} />

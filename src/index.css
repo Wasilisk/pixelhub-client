@@ -9,6 +9,27 @@ body {
   color: #212529;
   text-align: left;
   background-color: #edf1f4;
+  overflow-y: scroll;
+}
+
+body div::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+body div::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+body div::-webkit-scrollbar-thumb {
+  background: #cbcbcb;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+body div::-webkit-scrollbar-thumb:hover {
+  background: #cbcbcb;
 }
 
 code {

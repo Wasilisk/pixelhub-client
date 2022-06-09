@@ -1,6 +1,6 @@
 import React from 'react';
 import Background from "../components/Background";
-import PixelHubLogo from "../assets/logo/pixelhub_logo.png"
+import PixelHubLogo from "../assets/logo/pixelhub_icon.png"
 import AuthContainer from "../components/AuthContainer";
 import ResetPasswordRequestForm from "../components/forms/ResetPasswordRequestForm";
 import {CustomLink} from "../elements/common";

@@ -22,6 +22,6 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { logout } = counterSlice.actions
+export const {login, logout} = counterSlice.actions
 
 export default counterSlice.reducer

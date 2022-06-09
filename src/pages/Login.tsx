@@ -1,7 +1,7 @@
 import React from 'react';
 import Background from "../components/Background";
 import DividerWithText from "../components/DividerWithText";
-import PixelHubLogo from "../assets/logo/pixelhub_logo.png"
+import PixelHubLogo from "../assets/logo/pixelhub_icon.png"
 import AuthContainer from "../components/AuthContainer";
 import LoginForm from "../components/forms/LoginForm";
 import {DiscordButton, FacebookButton, GoogleButton} from "../elements/buttons";
